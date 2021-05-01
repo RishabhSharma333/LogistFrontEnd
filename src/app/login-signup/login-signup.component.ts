@@ -7,21 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-signup.component.css']
 })
 export class LoginSignupComponent implements OnInit {
-  name:string="";
-  loginSignupAs:string="";
-  password:string="";
-  role:string="";
-  constructor(private router:Router) {
-    this.name="";
-    this.password="";
-    this.role="";
-   }
-   roles= [
-    {value: 'customer', viewValue: 'Customer'},
-    {value: 'truckowner', viewValue: 'Truck owner'},
-    {value: 'admin', viewValue: 'Admin'}
-  ];
-
+  
+  constructor() {
+    
+  }
+   
   ngOnInit(): void {
   }
  

@@ -1,12 +1,24 @@
-<mat-toolbar
-  ><span> <a mat-icon-button routerLink="/">Logist Technologies</a></span>
+<mat-toolbar>
+  <span> <a mat-icon-button routerLink="/"><h2>Logist Technologies</h2></a></span>
+  <span class="spacer" 
+    ></span>
+
+    <mat-label style="margin-right: 20px; font-weight: 300;">Login as</mat-label>
+    <mat-form-field  style="margin-top: 4px;margin-right: 20px;">
+      <mat-select [(value)]="credentials.role">
+        <mat-option value="Customer">Customer</mat-option>
+        <mat-option value="Truck-owner">Truck Owner</mat-option>
+        <mat-option value="Admin">Admin</mat-option>
+      </mat-select>
+    </mat-form-field>
+ 
 </mat-toolbar>
 
 <div class="bootstrap-wrapper">
   <div class="container text-center" style="margin-top: 200px;">
     <div class="row">
       <div class="col-md-6 offset-md-3">
-        <h1 class="text-center">Login Here</h1>
+        <h1 class="text-center">Login as {{credentials.role}}</h1>
 
         <form (ngSubmit)="onSubmit()">
           <mat-form-field class="full-width">
@@ -29,7 +41,7 @@
              matInput />
           </mat-form-field>
           <div class="container text-center">
-              <button type="submit" mat-raised-button color="primary">Login</button>
+              <button type="submit" mat-raised-button color="primary" (onClick)="onSubmit()">Login</button>
               <button type="reset" mat-raised-button color="accent" style="margin-left: 10px;">Reset</button>
 
           </div>

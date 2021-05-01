@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   
-  constructor(private router:Router) {
+  constructor() {
     
    }
 
@@ -17,11 +15,14 @@ export class SignupComponent implements OnInit {
   }
   credentials={
     username:'',
-    password:''
+    password:'',
+    role:'Customer'
   }
   onSignup(){
     if((this.credentials.username!='' && this.credentials.password!='')&&(this.credentials.password!=null&&this.credentials.username!=null)){
-      console.log("submit form to customer");
+      console.log(this.credentials.username);
+      console.log(this.credentials.password);
+      console.log(this.credentials.role);
     }
   }
 

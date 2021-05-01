@@ -7,16 +7,19 @@ import { AdminComponent } from './admin/admin.component';
 import { TruckOwnerComponent } from './truck-owner/truck-owner.component';
 import { CustomerComponent } from './customer/customer.component';
 import { LoginSignupComponent } from './login-signup/login-signup.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatButtonModule} from '@angular/material/button';
+import { MatInputModule} from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login-signup/login/login.component';
 import { SignupComponent } from './login-signup/signup/signup.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule} from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatSelectModule} from '@angular/material/select';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { SharedServiceService } from './shared-service.service';
 
  
 @NgModule({
@@ -31,17 +34,21 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MatToolbarModule,
     MatInputModule,
     BrowserAnimationsModule,
+    MatSelectModule,
     MatButtonModule,
     FormsModule,
     MatFormFieldModule,
     MatCardModule,
     CommonModule,
   ],
-  providers: [],
+  providers: [
+    SharedServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
