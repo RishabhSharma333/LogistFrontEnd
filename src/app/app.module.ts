@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
-import { TruckOwnerComponent } from './truck-owner/truck-owner.component';
 import { CustomerComponent } from './customer/customer.component';
 import { LoginSignupComponent } from './login-signup/login-signup.component';
 import { MatToolbarModule} from '@angular/material/toolbar';
@@ -19,18 +18,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedServiceService } from './shared-service.service';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTableModule} from '@angular/material/table';
+import { LoginService } from './login.service';
+ 
 
  
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
-    TruckOwnerComponent,
     CustomerComponent,
     LoginSignupComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +41,8 @@ import { SharedServiceService } from './shared-service.service';
     MatInputModule,
     BrowserAnimationsModule,
     MatSelectModule,
+    MatGridListModule,
+    MatTableModule,
     MatButtonModule,
     FormsModule,
     MatFormFieldModule,
@@ -47,7 +50,8 @@ import { SharedServiceService } from './shared-service.service';
     CommonModule,
   ],
   providers: [
-    SharedServiceService
+    LoginService
+    //add interceptor here 
   ],
   bootstrap: [AppComponent]
 })

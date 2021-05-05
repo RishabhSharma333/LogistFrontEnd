@@ -1,1 +1,139 @@
-<p>customer works!</p>
+<mat-toolbar>
+  <span>
+    <a mat-icon-button routerLink="/"><h2>Logist Technologies</h2></a></span
+  >
+  <span class="spacer"></span>
+  <span
+    ><a mat-icon-button routerLink="/" style="margin-right: 30px" (click)="onLogout()"
+      ><h2>Logout</h2></a
+    ></span
+  >
+</mat-toolbar>
+<div class="bootstrap-wrapper text-center">
+  <h2
+    class="col-md-6"
+    style="margin-left: auto; margin-right: auto; margin-top: 20px"
+  >
+    Have a look upon our Transportation Services
+  </h2>
+</div>
+<br />
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-title>
+                Attach your vehicle with us
+            </mat-card-title>
+            <mat-card-content>
+                <form>
+
+                    <mat-label style="margin-right: 20px; font-weight: 300;">Truck Type</mat-label>
+                    <mat-form-field  class="full-width">
+                      <mat-select [(value)]="attachVehicle.trucktype">
+                        <mat-option value="Tata">Tata</mat-option>
+                        <mat-option value="Nexon">Nexon</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                      <mat-label>Location</mat-label>
+                      <input 
+                      [(ngModel)]="attachVehicle.location"
+                      required
+                      name=location
+                      type="text" 
+                      matInput />
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="full-width">
+                      <mat-label>Tonnage</mat-label>
+                      <input 
+                      [(ngModel)]="attachVehicle.weightage"
+                      required
+                      name=weightage
+                      type="number"
+                       matInput />
+                    </mat-form-field>
+                    <div class="container text-center">
+                        <button type="submit" mat-raised-button color="primary" >Attach Vehicle</button>
+                        <button type="reset" mat-raised-button  style="margin-left: 10px;">Reset</button>
+          
+                    </div>
+          
+                  </form>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-title>
+                Book a Truck now
+            </mat-card-title>
+            <mat-card-content>
+              <form>
+
+                <mat-label style="margin-right: 20px; font-weight: 300;">Truck Type</mat-label>
+                <mat-form-field  class="full-width">
+                  <mat-select [(value)]="truckBook.trucktype">
+                    <mat-option value="Tata">Tata</mat-option>
+                    <mat-option value="Nexon">Nexon</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <mat-label>Location</mat-label>
+                  <input 
+                  [(ngModel)]="truckBook.from"
+                  required
+                  name=from
+                  type="text" 
+                  matInput />
+                </mat-form-field>
+                <br>
+                <mat-form-field class="full-width">
+                  <mat-label>Tonnage</mat-label>
+                  <input 
+                  [(ngModel)]="truckBook.to"
+                  required
+                  name=to
+                  type="number"
+                   matInput />
+                </mat-form-field>
+                <br>
+                <mat-form-field class="full-width">
+                <mat-label>Date</mat-label>
+                  <input 
+                  [(ngModel)]="truckBook.date"
+                  required
+                  name=location
+                  type="date" 
+                  matInput />
+                </mat-form-field>
+                <br>
+                <mat-form-field class="full-width">
+                <mat-label>Time</mat-label>
+                  <input 
+                  [(ngModel)]="truckBook.time"
+                  required
+                  name=time
+                  type="time" 
+                  matInput />
+                </mat-form-field>
+                <br> 
+                <div class="container text-center">
+                    <button type="submit" mat-raised-button color="primary" >Book Truck</button>
+                    <button type="reset" mat-raised-button  style="margin-left: 10px;">Reset</button>
+                </div>
+      
+              </form>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+   
+  </mat-grid-list>
+
+  
+ 
+ 
+

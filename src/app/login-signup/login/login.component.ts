@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedServiceService } from 'src/app/shared-service.service';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/login.service';
 
 @Component({
   selector: 'app-login',
@@ -7,33 +8,38 @@ import { SharedServiceService } from 'src/app/shared-service.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private sharedService:SharedServiceService) {
+  
+  constructor(private loginService: LoginService, private router: Router) {
     
   }
-
   ngOnInit(): void {}
-  credentials={
-    username:'',
-    password:'',
-    role:'Customer'
-  }
-  onSubmit(){
-    if((this.credentials.username!='' && this.credentials.password!='')&&(this.credentials.password!=null&&this.credentials.username!=null)){
-      console.log(this.credentials.username);
-      console.log(this.credentials.password);
-      console.log(this.credentials.role);
-      this.sharedService.sendPostRequest({"username":this.credentials.username,
-                                          "password":this.credentials.password,
-                                          "role":this.credentials.role}).subscribe(
-                                            res=>{console.log("values are stored",res);}
+  credentials = {
+    username: '',
+    password: '',
+    role: 'Customer',
+  };
+   
+  onSubmit() {
+    if (
+      this.credentials.username != '' &&
+      this.credentials.password != '' &&
+      this.credentials.password != null &&
+      this.credentials.username != null
+    ) {
+      this.loginService.loginByUsernamePassword(this.credentials).subscribe(
+        (response: any) => {
+          console.log(response);
+          if (response == null) {
+            this.router.navigate(['/customer']);
+            this.loginService.loggedIn=true;
+            this.loginService.userId=response.id;
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.router.navigate(['/login']);
+        }
       );
     }
   }
-
- 
-
-
-
-    
-  
 }

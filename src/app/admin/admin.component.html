@@ -1,1 +1,134 @@
-<p>admin works!</p>
+<mat-toolbar>
+  <span>
+    <a mat-icon-button routerLink="/"><h2>Logist Technologies</h2></a></span
+  >
+  <span class="spacer"></span>
+  <span
+    ><a mat-icon-button routerLink="/" style="margin-right: 30px"
+      ><h2>Logout</h2></a
+    ></span
+  >
+</mat-toolbar>
+
+<div class="bootstrap-wrapper">
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <mat-card>
+        <a mat-icon-button (click)="rolepick(0)">Users      </a>
+      </mat-card>
+      <br />
+      <mat-card>
+        <a mat-icon-button (click)="rolepick(1)">Fleet</a>
+      </mat-card>
+      <br />
+      <mat-card>
+        <a mat-icon-button (click)="rolepick(2)">Trips</a>
+      </mat-card>
+    </div>
+
+
+    <div class="col-md-10" style="margin-top: 20px">
+
+      <div *ngIf="presentwindow == 0" class="bootstrap-wrapper">
+
+        <mat-label style="margin-right: 20px; font-weight: 300;">Show</mat-label>
+        <mat-form-field  style="margin-top: 4px;margin-right: 20px;">
+          <mat-select [(value)]="openrole">
+            <mat-option value="allUsers">All Users</mat-option>
+            <mat-option value="allAdmins">Admins Only</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <table mat-table [dataSource]="dataSourceUser" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.phoneNumber }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsUser"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsUser"></tr>
+        </table>
+      </div>
+
+      <div *ngIf="presentwindow == 1" class="bootstrap-wrapper">
+          <h2 class="text-center" >Available Fleets</h2>
+        <table
+          mat-table
+          [dataSource]="dataSourceFleet"
+          class="mat-elevation-z8"
+        >
+          <ng-container matColumnDef="trucktype">
+            <th mat-header-cell *matHeaderCellDef>Truck Type</th>
+            <td mat-cell *matCellDef="let element">{{ element.trucktype }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef>Location</th>
+            <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="tonnage">
+            <th mat-header-cell *matHeaderCellDef>Tonnage</th>
+            <td mat-cell *matCellDef="let element">{{ element.tonnage }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsFleet"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsFleet"></tr>
+        </table>
+      </div>
+
+      <div *ngIf="presentwindow == 2" class="bootstrap-wrapper">
+        <h2 class="text-center" >All Trips</h2>
+        <table
+          mat-table
+          [dataSource]="dataSourceTrips"
+          class="mat-elevation-z8"
+        >
+
+            <ng-container matColumnDef="from">
+            <th mat-header-cell *matHeaderCellDef>From</th>
+            <td mat-cell *matCellDef="let element">{{ element.from }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="to">
+            <th mat-header-cell *matHeaderCellDef>Location</th>
+            <td mat-cell *matCellDef="let element">{{ element.to }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="trucktype">
+            <th mat-header-cell *matHeaderCellDef>Truck Type</th>
+            <td mat-cell *matCellDef="let element">{{ element.trucktype }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef>Assign</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-button [disabled]="element.state==='completed'">Assign</button>
+            </td>
+          </ng-container>
+          
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsTrips"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsTrips"></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

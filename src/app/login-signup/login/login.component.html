@@ -7,7 +7,6 @@
     <mat-form-field  style="margin-top: 4px;margin-right: 20px;">
       <mat-select [(value)]="credentials.role">
         <mat-option value="Customer">Customer</mat-option>
-        <mat-option value="Truck-owner">Truck Owner</mat-option>
         <mat-option value="Admin">Admin</mat-option>
       </mat-select>
     </mat-form-field>
@@ -43,9 +42,7 @@
           <div class="container text-center">
               <button type="submit" mat-raised-button color="primary" (onClick)="onSubmit()">Login</button>
               <button type="reset" mat-raised-button color="accent" style="margin-left: 10px;">Reset</button>
-
           </div>
-
         </form>
       </div>
     </div>
