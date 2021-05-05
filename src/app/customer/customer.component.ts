@@ -1,6 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 
+
+export interface fleet{
+  trucktype:string;
+  location:string;
+  tonnage:number;
+  }
+  export interface trip{
+    from:string;
+    to:string;
+    time:string;
+    date:string;
+    truckType:string;
+  }
+
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -9,18 +23,18 @@ import { LoginService } from '../login.service';
 export class CustomerComponent implements OnInit {
   allAttachedVehicle: any;
   allBookedTruck: any;
-  allTrips:any;
-  allFleets:any;
+  allTrips:trip[]=[];
+  allFleets:fleet[]=[];
+  displayedColumnsFleet: string[] = [ 'trucktype', 'location', 'tonnage'];
+  displayedColumnsTrips: string[] = [ 'from', 'to', 'trucktype','date','time'];
   constructor(private loginService: LoginService) {
     this.allAttachedVehicle = [];
     this.allBookedTruck = [];
-  }
-
-  ngOnInit(): void {
     this.loginService.getTripsByUsername().subscribe(
       (response: any) => {
         console.log(response);
-        
+        this.allTrips=response;
+        // console.log(this.allTrips);
       },
       (error) => {
         console.log(error);
@@ -29,11 +43,18 @@ export class CustomerComponent implements OnInit {
     this.loginService.getFleetsByUsername().subscribe(
       (response: any) => {
         console.log(response);
+        this.allFleets=response;
+        // console.log(this.allFleets);
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  ngOnInit(): void {
+
+    
   }
   attachVehicle = {
     truckType: '',
@@ -44,7 +65,7 @@ export class CustomerComponent implements OnInit {
   truckBook = {
     from: '',
     to: '',
-    trucktype: '',
+    truckType: '',
     date: '',
     time: '',
   };
@@ -64,16 +85,16 @@ export class CustomerComponent implements OnInit {
     if (
       this.truckBook.date != null &&
       this.truckBook.to != null &&
-      this.truckBook.trucktype != null &&
+      this.truckBook.truckType != null &&
       this.truckBook.time != null &&
       this.truckBook.from != null &&
       this.truckBook.date != '' &&
       this.truckBook.to != '' &&
-      this.truckBook.trucktype != '' &&
+      this.truckBook.truckType != '' &&
       this.truckBook.time != '' &&
       this.truckBook.from != ''
     ) {
-      // console.log(this.truckBook);
+      // console.log(this.truckBook.truckType+ 'see here');
       this.loginService.bookTruck(this.truckBook).subscribe(
         (response: any) => {
           if (response != null && response.tripId != null) {

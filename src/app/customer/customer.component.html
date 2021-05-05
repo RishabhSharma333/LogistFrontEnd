@@ -75,14 +75,14 @@
 
                 <mat-label style="margin-right: 20px; font-weight: 300;">Truck Type</mat-label>
                 <mat-form-field  class="full-width">
-                  <mat-select [(value)]="truckBook.trucktype">
+                  <mat-select [(value)]="truckBook.truckType">
                     <mat-option value="Tata">Tata</mat-option>
                     <mat-option value="Nexon">Nexon</mat-option>
                   </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
-                  <mat-label>Location</mat-label>
+                  <mat-label>From</mat-label>
                   <input 
                   [(ngModel)]="truckBook.from"
                   required
@@ -92,12 +92,12 @@
                 </mat-form-field>
                 <br>
                 <mat-form-field class="full-width">
-                  <mat-label>Tonnage</mat-label>
+                  <mat-label>To</mat-label>
                   <input 
                   [(ngModel)]="truckBook.to"
                   required
                   name=to
-                  type="number"
+                  type="text"
                    matInput />
                 </mat-form-field>
                 <br>
@@ -106,7 +106,7 @@
                   <input 
                   [(ngModel)]="truckBook.date"
                   required
-                  name=location
+                  name=date
                   type="date" 
                   matInput />
                 </mat-form-field>
@@ -132,6 +132,83 @@
     </mat-grid-tile>
    
   </mat-grid-list>
+
+<div class="row">
+  <div class="col-md-6">
+    <div *ngIf="allFleets" class="bootstrap-wrapper">
+      <h2 class="text-center" >Available Fleets</h2>
+    <table
+      mat-table
+      [dataSource]="allFleets"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="trucktype">
+        <th mat-header-cell *matHeaderCellDef>Truck Type</th>
+        <td mat-cell *matCellDef="let element">{{ element.truckType }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef>Location</th>
+        <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="tonnage">
+        <th mat-header-cell *matHeaderCellDef>Tonnage</th>
+        <td mat-cell *matCellDef="let element">{{ element.tonnage }}</td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsFleet"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsFleet"></tr>
+    </table>
+  </div>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="allTrips" class="bootstrap-wrapper">
+      <h2 class="text-center" >All Trips</h2>
+      <table
+        mat-table
+        [dataSource]="allTrips"
+        class="mat-elevation-z8"
+      >
+    
+          <ng-container matColumnDef="from">
+          <th mat-header-cell *matHeaderCellDef>From</th>
+          <td mat-cell *matCellDef="let element">{{ element.from }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="to">
+          <th mat-header-cell *matHeaderCellDef>Location</th>
+          <td mat-cell *matCellDef="let element">{{ element.to }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="trucktype">
+          <th mat-header-cell *matHeaderCellDef>Truck Type</th>
+          <td mat-cell *matCellDef="let element">{{ element.truckType }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef>Time</th>
+          <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsTrips"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsTrips"></tr>
+      </table>
+    </div>
+  </div>
+</div>
+ 
+  
+
+
+
+
+
 
   
  

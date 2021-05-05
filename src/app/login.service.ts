@@ -68,4 +68,21 @@ export class LoginService {
       tripList: [],
     });
   }
+  getAllFleets(){
+    let urlFleet: string = 'http://localhost:9003/api/logist/getAllFleets';
+    return this.http.get(urlFleet);
+
+  }
+  getTripsByFleet(fleetId:string){
+    let urlFleet: string = 'http://localhost:9003/api/logist/getFleetAndTrips/'+fleetId;
+    return this.http.get(urlFleet);
+  }
+  getAllTrips(){
+    let urlFleet: string = 'http://localhost:9002/api/logist/trips/all';
+    return this.http.get(urlFleet);
+  }
+  getAllUser(){
+    let urlFleet:string='http://localhost:8080/api/logist/users/get/all';
+    return this.http.get(urlFleet);
+  }
 }
