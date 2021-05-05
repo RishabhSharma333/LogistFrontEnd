@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/login.service';
@@ -16,9 +17,8 @@ export class LoginComponent implements OnInit {
   credentials = {
     username: '',
     password: '',
-    role: 'Customer',
   };
-   
+   warning='';
   onSubmit() {
     if (
       this.credentials.username != '' &&
@@ -28,18 +28,32 @@ export class LoginComponent implements OnInit {
     ) {
       this.loginService.loginByUsernamePassword(this.credentials).subscribe(
         (response: any) => {
-          console.log(response);
-          if (response == null) {
-            this.router.navigate(['/customer']);
-            this.loginService.loggedIn=true;
-            this.loginService.userId=response.id;
+          // console.log(response);
+          if(response&&response.id!=null){
+             this.loginService.userId=response.id;
+             this.loginService.role=response.role;
+             if(response.role=='Admin'){
+               this.router.navigate(['/admin']);
+             }
+             else{
+               this.router.navigate(['/customer']);
+             }
           }
+          else{
+            this.warning='Such combination doesnt exists';
+
+          }
+         
         },
         (error) => {
           console.log(error);
-          this.router.navigate(['/login']);
         }
       );
-    }
+    } 
   }
+
+  // onLogout(){
+  //   this.loginService.role='';
+  //   this.loginService.userId='';
+  // }
 }

@@ -3,13 +3,8 @@
   <span class="spacer" 
     ></span>
 
-    <mat-label style="margin-right: 20px; font-weight: 300;">Login as</mat-label>
-    <mat-form-field  style="margin-top: 4px;margin-right: 20px;">
-      <mat-select [(value)]="credentials.role">
-        <mat-option value="Customer">Customer</mat-option>
-        <mat-option value="Admin">Admin</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-label style="margin-right: 20px; font-weight: 300;">Login Page</mat-label>
+    
  
 </mat-toolbar>
 
@@ -17,7 +12,7 @@
   <div class="container text-center" style="margin-top: 200px;">
     <div class="row">
       <div class="col-md-6 offset-md-3">
-        <h1 class="text-center">Login as {{credentials.role}}</h1>
+        <h1 class="text-center">Login  Here </h1>
 
         <form (ngSubmit)="onSubmit()">
           <mat-form-field class="full-width">
@@ -40,6 +35,7 @@
              matInput />
           </mat-form-field>
           <div class="container text-center">
+            <p *ngIf="warning"style="color:brown"> {{warning}}</p>
               <button type="submit" mat-raised-button color="primary" (onClick)="onSubmit()">Login</button>
               <button type="reset" mat-raised-button color="accent" style="margin-left: 10px;">Reset</button>
           </div>

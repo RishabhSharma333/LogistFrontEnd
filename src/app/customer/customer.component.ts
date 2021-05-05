@@ -7,17 +7,39 @@ import { LoginService } from '../login.service';
   styleUrls: ['./customer.component.css']
 })
 export class CustomerComponent implements OnInit {
+allAttachedVehicle:any;
+allBookedTruck:any;
+  constructor(private loginService:LoginService) {
+    this.allAttachedVehicle=[];
+    this.allBookedTruck=[];
 
-  constructor(private loginService:LoginService) { }
+   }
 
   ngOnInit(): void {
+    this.loginService.getTripsByUsername().subscribe(
+      (response:any)=>{
+        console.log(response)
+      }
+      ,
+      (error)=>{
+        console.log(error)
+      }
+    );
+    this.loginService.getFleetsByUsername().subscribe(
+      (response:any)=>{
+        console.log(response)
+      },
+      (error)=>{
+        console.log(error)
+      }
+    );
   }
   attachVehicle={
     trucktype:'',
     location:'',
     weightage:0
   }
-
+  
   truckBook={
     from:'',
     to:'',
@@ -26,8 +48,8 @@ export class CustomerComponent implements OnInit {
     time:''
   }
   onLogout(){
-    this.loginService.loggedIn=false;
     this.loginService.userId='';
+    this.loginService.role='';
   }
 
 }

@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 import { LoginService } from './login.service';
+// import {MatSnackBarModule} from '@angular/material/snack-bar';
  
 
  
@@ -51,7 +52,6 @@ import { LoginService } from './login.service';
   ],
   providers: [
     LoginService
-    //add interceptor here 
   ],
   bootstrap: [AppComponent]
 })
