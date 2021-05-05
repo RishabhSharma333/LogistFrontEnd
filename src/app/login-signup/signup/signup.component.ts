@@ -8,7 +8,7 @@ import { LoginService } from 'src/app/login.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  constructor(private loginService:LoginService,private router :Router) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {}
   credentials = {
@@ -24,28 +24,31 @@ export class SignupComponent implements OnInit {
       this.credentials.username != null
     ) {
       this.loginService.signUpByUsernamepassword(this.credentials).subscribe(
-        (response:any)=>{
-          if(response==null){
+        (response: any) => {
+          if (response == null) {
             this.router.navigate(['/login']);
-          }
-          else{
-            this.loginService.userId=response.id;
-            this.loginService.role=response.role;
-            if(response.role=='Admin'){
+          } else {
+            this.loginService.userId = response.id;
+            this.loginService.role = response.role;
+            this.loginService.addNewUserDetails().subscribe(
+              (response:any) => {
+                console.log(response);
+              },
+              (error:any) => {
+                console.log(error);
+              }
+            );
+            if (response.role == 'Admin') {
               this.router.navigate(['/admin']);
-            }
-            else{
+            } else {
               this.router.navigate(['/customer']);
             }
-            
           }
         },
-        (error)=>{
-          console.log(error)
+        (error) => {
+          console.log(error);
         }
-        ); 
-        
+      );
     }
   }
-  
 }
