@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { LoginService } from '../login.service';
 
 export interface users {
@@ -10,6 +11,7 @@ export interface fleet {
   location: string;
   tonnage: number;
 }
+
 export interface trips {
   from: string;
   to: string;
@@ -18,6 +20,7 @@ export interface trips {
   state: string;
 }
 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -25,7 +28,8 @@ export interface trips {
 })
 export class AdminComponent implements OnInit {
   displayedColumnsUser: string[] = ['name', 'role' ];
-  displayedColumnsFleet: string[] = ['trucktype', 'location', 'tonnage'];
+  displayedColumnsFleetOnly: string[] = ['trucktype', 'location', 'tonnage'];
+  displayedColumnsFleet: string[] = ['trucktype', 'location', 'tonnage','assign'];
   displayedColumnsTrips: string[] = [
     'from',
     'to',
@@ -33,9 +37,11 @@ export class AdminComponent implements OnInit {
     'date',
     'state',
   ];
-  dataSourceUser: users[] = [];
+  // dataSourceUser=new MatTableDataSource<users>()
+  dataSourceUser:users[]=[];
   dataSourceFleet: fleet[] = [];
   dataSourceTrips: trips[] = [];
+  assigningTripId:string='';
   openrole: string = 'allUsers';
   constructor(private loginService: LoginService) {
     this.loginService.getAllFleets().subscribe(
@@ -66,11 +72,40 @@ export class AdminComponent implements OnInit {
         console.log(error);
       }
     );
+    this.assigningTripId='';
   }
 
   ngOnInit(): void {}
+
+
+
+
+// refreshUser() {
+//   this.myService.doSomething().subscribe((data: users[]) => {
+//     this.dataSource.data = data;
+//   }
   presentwindow: number = 0;
   rolepick(value: number) {
     this.presentwindow = value;
+  }
+  assignTrip(tripId:string){
+    this.assigningTripId=tripId;
+    console.log(tripId);
+  }
+  assignFleet(fleetId:string){
+    if(this.assigningTripId==''){
+      console.log('no fleet selected');
+    }
+    else{
+      console.log(fleetId+'fleetId');
+      this.loginService.addFleetToTrip(this.assigningTripId,fleetId).subscribe(
+        (response)=>{
+          console.log(response+ 'from assign fleet');
+        },
+        (error)=>{}
+      );
+      this.assigningTripId='';
+    }
+
   }
 }

@@ -11,7 +11,7 @@ import { LoginService } from 'src/app/login.service';
 export class LoginComponent implements OnInit {
   
   constructor(private loginService: LoginService, private router: Router) {
-    
+    this.loginService.clear();
   }
   ngOnInit(): void {}
   credentials = {

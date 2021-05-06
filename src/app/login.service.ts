@@ -14,6 +14,10 @@ export class LoginService {
     this.userId = '';
     this.role = '';
   }
+  clear(){
+    this.userId='';
+    this.role='';
+  }
 
   loginByUsernamePassword(credentials: any) {
     return this.http.get(
@@ -33,6 +37,7 @@ export class LoginService {
     this.userId = '';
   }
   getTripsByUsername() {
+  // let urltrip='http://localhost:9002/api/logist';
     return this.http.get(`${this.url2}/getTrips/` + this.userId);
   }
   getFleetsByUsername() {
@@ -68,21 +73,29 @@ export class LoginService {
       tripList: [],
     });
   }
-  getAllFleets(){
+  getAllFleets() {
     let urlFleet: string = 'http://localhost:9003/api/logist/getAllFleets';
     return this.http.get(urlFleet);
-
   }
-  getTripsByFleet(fleetId:string){
-    let urlFleet: string = 'http://localhost:9003/api/logist/getFleetAndTrips/'+fleetId;
+  getTripsByFleet(fleetId: string) {
+    let urlFleet: string =
+      'http://localhost:9003/api/logist/getFleetAndTrips/' + fleetId;
     return this.http.get(urlFleet);
   }
-  getAllTrips(){
+  getAllTrips() {
     let urlFleet: string = 'http://localhost:9002/api/logist/trips/all';
     return this.http.get(urlFleet);
   }
-  getAllUser(){
-    let urlFleet:string='http://localhost:8080/api/logist/users/get/all';
+  getAllUser() {
+    let urlFleet: string = 'http://localhost:8080/api/logist/users/get/all';
     return this.http.get(urlFleet);
+  }
+
+  addFleetToTrip(tripId: string, fleetId: string) {
+    let urlFleet: string = 'http://localhost:9002/api/logist/trips/addFleet';
+    return this.http.put(urlFleet, {
+      fleetId: fleetId,
+      tripId: tripId,
+    });
   }
 }

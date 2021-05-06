@@ -4,7 +4,11 @@
   >
   <span class="spacer"></span>
   <span
-    ><a mat-icon-button routerLink="/" style="margin-right: 30px" (click)="onLogout()"
+    ><a
+      mat-icon-button
+      routerLink="/"
+      style="margin-right: 30px"
+      (click)="onLogout()"
       ><h2>Logout</h2></a
     ></span
   >
@@ -19,198 +23,183 @@
 </div>
 <br />
 <mat-grid-list cols="2" rowHeight="2:1">
-    <mat-grid-tile>
-        <mat-card>
-            <mat-card-title>
-                Attach your vehicle with us
-            </mat-card-title>
-            <mat-card-content>
-                <form>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title> Attach your vehicle with us </mat-card-title>
+      <mat-card-content>
+        <form>
+          <mat-label style="margin-right: 20px; font-weight: 300"
+            >Truck Type</mat-label
+          >
+          <mat-form-field class="full-width">
+            <mat-select [(value)]="attachVehicle.truckType">
+              <mat-option value="Tata">Tata</mat-option>
+              <mat-option value="Nexon">Nexon</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-                    <mat-label style="margin-right: 20px; font-weight: 300;">Truck Type</mat-label>
-                    <mat-form-field  class="full-width">
-                      <mat-select [(value)]="attachVehicle.truckType">
-                        <mat-option value="Tata">Tata</mat-option>
-                        <mat-option value="Nexon">Nexon</mat-option>
-                      </mat-select>
-                    </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Location</mat-label>
+            <input
+              [(ngModel)]="attachVehicle.location"
+              required
+              name="location"
+              type="text"
+              matInput
+            />
+          </mat-form-field>
+          <br />
+          <mat-form-field class="full-width">
+            <mat-label>Tonnage</mat-label>
+            <input
+              [(ngModel)]="attachVehicle.tonnage"
+              required
+              name="weightage"
+              type="number"
+              matInput
+            />
+          </mat-form-field>
+          <div class="container text-center">
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              (click)="addFleet()"
+            >
+              Attach Vehicle
+            </button>
+            <button type="reset" mat-raised-button style="margin-left: 10px">
+              Reset
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
 
-                    <mat-form-field class="full-width">
-                      <mat-label>Location</mat-label>
-                      <input 
-                      [(ngModel)]="attachVehicle.location"
-                      required
-                      name=location
-                      type="text" 
-                      matInput />
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field class="full-width">
-                      <mat-label>Tonnage</mat-label>
-                      <input 
-                      [(ngModel)]="attachVehicle.tonnage"
-                      required
-                      name=weightage
-                      type="number"
-                       matInput />
-                    </mat-form-field>
-                    <div class="container text-center">
-                        <button type="submit" mat-raised-button color="primary" (click)="addFleet()">Attach Vehicle</button>
-                        <button type="reset" mat-raised-button  style="margin-left: 10px;">Reset</button>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title> Book a Truck now </mat-card-title>
+      <mat-card-content>
+        <form>
+          <mat-label style="margin-right: 20px; font-weight: 300"
+            >Truck Type</mat-label
+          >
+          <mat-form-field class="full-width">
+            <mat-select [(value)]="truckBook.truckType">
+              <mat-option value="Tata">Tata</mat-option>
+              <mat-option value="Nexon">Nexon</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>From</mat-label>
+            <input
+              [(ngModel)]="truckBook.from"
+              required
+              name="from"
+              type="text"
+              matInput
+            />
+          </mat-form-field>
+          <br />
+          <mat-form-field class="full-width">
+            <mat-label>To</mat-label>
+            <input
+              [(ngModel)]="truckBook.to"
+              required
+              name="to"
+              type="text"
+              matInput
+            />
+          </mat-form-field>
+          <br />
+          <mat-form-field class="full-width">
+            <mat-label>Date</mat-label>
+            <input
+              [(ngModel)]="truckBook.date"
+              required
+              name="date"
+              type="date"
+              matInput
+            />
+          </mat-form-field>
+          <br />
           
-                    </div>
-          
-                  </form>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
+          <br />
+          <div class="container text-center">
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              (click)="bookTruck()"
+            >
+              Book Truck
+            </button>
+            <button type="reset" mat-raised-button style="margin-left: 10px">
+              Reset
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
 
-    <mat-grid-tile>
-        <mat-card>
-            <mat-card-title>
-                Book a Truck now
-            </mat-card-title>
-            <mat-card-content>
-              <form>
+<div class="bootstrap-wrapper">
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngIf="allFleets" class="bootstrap-wrapper">
+        <h2 class="text-center">All Fleets</h2>
+        <table mat-table [dataSource]="allFleets" class="mat-elevation-z8">
+          <ng-container matColumnDef="trucktype">
+            <th mat-header-cell *matHeaderCellDef>Truck Type</th>
+            <td mat-cell *matCellDef="let element">{{ element.truckType }}</td>
+          </ng-container>
 
-                <mat-label style="margin-right: 20px; font-weight: 300;">Truck Type</mat-label>
-                <mat-form-field  class="full-width">
-                  <mat-select [(value)]="truckBook.truckType">
-                    <mat-option value="Tata">Tata</mat-option>
-                    <mat-option value="Nexon">Nexon</mat-option>
-                  </mat-select>
-                </mat-form-field>
+          <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef>Location</th>
+            <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+          </ng-container>
 
-                <mat-form-field class="full-width">
-                  <mat-label>From</mat-label>
-                  <input 
-                  [(ngModel)]="truckBook.from"
-                  required
-                  name=from
-                  type="text" 
-                  matInput />
-                </mat-form-field>
-                <br>
-                <mat-form-field class="full-width">
-                  <mat-label>To</mat-label>
-                  <input 
-                  [(ngModel)]="truckBook.to"
-                  required
-                  name=to
-                  type="text"
-                   matInput />
-                </mat-form-field>
-                <br>
-                <mat-form-field class="full-width">
-                <mat-label>Date</mat-label>
-                  <input 
-                  [(ngModel)]="truckBook.date"
-                  required
-                  name=date
-                  type="date" 
-                  matInput />
-                </mat-form-field>
-                <br>
-                <mat-form-field class="full-width">
-                <mat-label>Time</mat-label>
-                  <input 
-                  [(ngModel)]="truckBook.time"
-                  required
-                  name=time
-                  type="time" 
-                  matInput />
-                </mat-form-field>
-                <br> 
-                <div class="container text-center">
-                    <button type="submit" mat-raised-button color="primary" (click)="bookTruck()" >Book Truck</button>
-                    <button type="reset" mat-raised-button  style="margin-left: 10px;">Reset</button>
-                </div>
-      
-              </form>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
-   
-  </mat-grid-list>
+          <ng-container matColumnDef="tonnage">
+            <th mat-header-cell *matHeaderCellDef>Tonnage</th>
+            <td mat-cell *matCellDef="let element">{{ element.tonnage }}</td>
+          </ng-container>
 
-<div class="row">
-  <div class="col-md-6">
-    <div *ngIf="allFleets" class="bootstrap-wrapper">
-      <h2 class="text-center" >Available Fleets</h2>
-    <table
-      mat-table
-      [dataSource]="allFleets"
-      class="mat-elevation-z8"
-    >
-      <ng-container matColumnDef="trucktype">
-        <th mat-header-cell *matHeaderCellDef>Truck Type</th>
-        <td mat-cell *matCellDef="let element">{{ element.truckType }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="location">
-        <th mat-header-cell *matHeaderCellDef>Location</th>
-        <td mat-cell *matCellDef="let element">{{ element.location }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="tonnage">
-        <th mat-header-cell *matHeaderCellDef>Tonnage</th>
-        <td mat-cell *matCellDef="let element">{{ element.tonnage }}</td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumnsFleet"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumnsFleet"></tr>
-    </table>
-  </div>
-  </div>
-  <div class="col-md-6">
-    <div *ngIf="allTrips" class="bootstrap-wrapper">
-      <h2 class="text-center" >All Trips</h2>
-      <table
-        mat-table
-        [dataSource]="allTrips"
-        class="mat-elevation-z8"
-      >
-    
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsFleet"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsFleet"></tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="allTrips" class="bootstrap-wrapper">
+        <h2 class="text-center">All Trips</h2>
+        <table mat-table [dataSource]="allTrips" class="mat-elevation-z8">
           <ng-container matColumnDef="from">
-          <th mat-header-cell *matHeaderCellDef>From</th>
-          <td mat-cell *matCellDef="let element">{{ element.from }}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="to">
-          <th mat-header-cell *matHeaderCellDef>Location</th>
-          <td mat-cell *matCellDef="let element">{{ element.to }}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="trucktype">
-          <th mat-header-cell *matHeaderCellDef>Truck Type</th>
-          <td mat-cell *matCellDef="let element">{{ element.truckType }}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef>Date</th>
-          <td mat-cell *matCellDef="let element">{{ element.date }}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="time">
-          <th mat-header-cell *matHeaderCellDef>Time</th>
-          <td mat-cell *matCellDef="let element">{{ element.time }}</td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsTrips"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumnsTrips"></tr>
-      </table>
+            <th mat-header-cell *matHeaderCellDef>From</th>
+            <td mat-cell *matCellDef="let element">{{ element.from }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="to">
+            <th mat-header-cell *matHeaderCellDef>Location</th>
+            <td mat-cell *matCellDef="let element">{{ element.to }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="truckType">
+            <th mat-header-cell *matHeaderCellDef>Truck Type</th>
+            <td mat-cell *matCellDef="let element">{{ element.truckType }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsTrips"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsTrips"></tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>
- 
-  
-
-
-
-
-
-
-  
- 
- 
-

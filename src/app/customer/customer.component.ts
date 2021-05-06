@@ -10,7 +10,6 @@ export interface fleet{
   export interface trip{
     from:string;
     to:string;
-    time:string;
     date:string;
     truckType:string;
   }
@@ -26,7 +25,7 @@ export class CustomerComponent implements OnInit {
   allTrips:trip[]=[];
   allFleets:fleet[]=[];
   displayedColumnsFleet: string[] = [ 'trucktype', 'location', 'tonnage'];
-  displayedColumnsTrips: string[] = [ 'from', 'to', 'trucktype','date','time'];
+  displayedColumnsTrips: string[] = [ 'from', 'to', 'truckType','date'];
   constructor(private loginService: LoginService) {
     this.allAttachedVehicle = [];
     this.allBookedTruck = [];
