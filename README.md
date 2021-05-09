@@ -1,14 +1,39 @@
-# LogistApp
+# Truck Uber 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.10.
+This is a SPWA .It supports authentication and lets users <br>
+1. Aattach their truck based on location and truckType.<br>
+2.Book a truck based on their requirement.<br>
+an Admin then assigns a truck to a trip.<br>
+It supports a mongodb as backend.<br>
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Technologies Used
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Angular 11,<br>
+Spring boot,Java<br>
+Microservices,<br>
+Angular Material,<br>
+MongoDb (for database)<br>
+
+## Screenshots
+### 1.Login
+A user/Admin logins ![alt text](https://github.com/RishabhSharma333/Truck_Uber/blob/main/src/assets/pictures/login%20form.png)<br>
+
+### 2.User registers his vehicle
+User can see all his Previous and current truck Data.![alt text](https://github.com/RishabhSharma333/Truck_Uber/blob/main/src/assets/pictures/fleet%20user.png)<br>
+
+### 3.Other User fills his requirements
+User can see all his previous and current Trips.![alt text](https://github.com/RishabhSharma333/Truck_Uber/blob/main/src/assets/pictures/trip%20user.png)<br>
+
+### 4.Admin can assign trips.
+he can see all user Details.<br>
+he can see all Trips.![alt text](https://github.com/RishabhSharma333/Truck_Uber/blob/main/src/assets/pictures/admin%20trips.png)<br>
+he can see all Truck availlable.![alt text](https://github.com/RishabhSharma333/Truck_Uber/blob/main/src/assets/pictures/admin%20fleet.png)<br>
+he assigns a Truck to a Trip.![alt text](https://github.com/RishabhSharma333/Truck_Uber/blob/main/src/assets/pictures/assigning%20fleet.png)<br>
+
+### 5.Backend MongoDb
+![alt text](https://github.com/RishabhSharma333/Truck_Uber/blob/main/src/assets/pictures/backend%20mongodb.png)<br>
 
 ## Build
 
