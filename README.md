@@ -1,9 +1,11 @@
 # Truck Uber 
 
 This is a SPWA .It supports authentication and lets users <br>
-1. Aattach their truck based on location and truckType.<br>
-2.Book a truck based on their requirement.<br>
-an Admin then assigns a truck to a trip.<br>
+1. Aattach their truck based on location and truck type.<br>
+2. Book a truck based on their requirement.<br>
+<br>
+<br>
+An Admin then assigns a truck to a trip.<br>
 It supports a mongodb as backend.<br>
 
 
