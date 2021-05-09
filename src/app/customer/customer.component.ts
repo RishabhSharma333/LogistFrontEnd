@@ -66,7 +66,6 @@ export class CustomerComponent implements OnInit {
     to: '',
     truckType: '',
     date: '',
-    time: '',
   };
   tripUserData = {
     userId: '',
@@ -85,12 +84,10 @@ export class CustomerComponent implements OnInit {
       this.truckBook.date != null &&
       this.truckBook.to != null &&
       this.truckBook.truckType != null &&
-      this.truckBook.time != null &&
       this.truckBook.from != null &&
       this.truckBook.date != '' &&
       this.truckBook.to != '' &&
       this.truckBook.truckType != '' &&
-      this.truckBook.time != '' &&
       this.truckBook.from != ''
     ) {
       // console.log(this.truckBook.truckType+ 'see here');

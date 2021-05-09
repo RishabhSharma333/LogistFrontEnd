@@ -88,6 +88,9 @@ export class AdminComponent implements OnInit {
   rolepick(value: number) {
     this.presentwindow = value;
   }
+  cancelAssignment(){
+    this.assigningTripId='';
+  }
   assignTrip(tripId:string){
     this.assigningTripId=tripId;
     console.log(tripId);
